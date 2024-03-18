@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./fonts/fontawesome-free-6.4.2-web/css/all.css">
+    <style>
+      body {
+        perspective: 1500px;
+    }
+    .colorise {
+        transform-style: preserve-3d;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        width: 20rem;
+        height: 30rem;
+        margin: auto;
+        margin-top: 10rem;
+        background: radial-gradient(ellipse at center,#353138 0%,#1a181c 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#353138', endColorstr='#1a181c', GradientType=1);
+        animation-name: gradient;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        animation-play-state: running;
+        border-width: 30px 0 50px 0;
+        border-style: solid;
+        border-color: #ff0000;
+        box-shadow: 0 0 50px 0 #444;
+        transform: translateY(-120px) rotateX(15deg) rotateZ(0deg);
+        position: relative;
+      }
+      .colorise::before {
+        content: "";
+        position: absolute;
+        height: 30px;
+        width: 100%;
+        top: 528px;
+        left: 0px;
+        transform: rotateX(110deg) translateY(-15px) translateZ(15px);
+        background: #ff0000;
+        pointer-events: none;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+      @keyframes gradient {
+        0% {
+          background: radial-gradient(
+            ellipse at center,
+            #353138 5%,
+            #1a181c 100%
+          );
+        }
+        33% {
+          background: radial-gradient(
+            ellipse at center,
+            #353138 10%,
+            #1a181c 100%
+          );
+        }
+        66% {
+          background: radial-gradient(
+            ellipse at center,
+            #353138 15%,
+            #1a181c 100%
+          );
+        }
+        100% {
+          background: radial-gradient(
+            ellipse at center,
+            #353138 10%,
+            #1a181c 100%
+          );
+        }
+      }
+      .power-button
+      {
+        position: absolute;
+        bottom: -2.5rem;
+        right: 50%;
+        transform: translateX(50%);
+        width: 2rem;
+        height: 2rem;
+        border-radius: 100px;
+        background-color: #7f0707;
+        cursor: pointer;
+      }
+      .power-button::after
+      {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        background-color: #ff0000;
+        border-radius: 100px;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%,-50%);
+        transition: all ease 300ms;
+      }
+      .power-button:hover::after
+      {
+        width: 78%;
+        height: 78%;
+      }
+      .video
+      {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .video video
+    {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .rotate-btn
+    {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        position: absolute;
+        bottom: 3rem;
+        right: 1rem;
+    }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="colorise">
+        <div class="video">
+            <video id="movie" src="./img/717367a7798713e7f787a092d09139c219713597-240p.mp4" controls>
+            </video>
+            <button class="rotate-btn"><i class="fa fa-arrow-rotate-right" aria-hidden="true"></i></button>
+        </div>
+        <div class="power-button"></div>
+    </div>
+
+    <script>
+        var x = true;
+        var y = true;
+        var video=document.getElementsByClassName("video")[0];
+        var movie=document.getElementById("movie");
+        document.getElementsByClassName("power-button")[0].addEventListener("click", ()=>
+        {
+            if(x==true)
+            {
+                x=false
+                video.style.display="none";
+                movie.currentTime=0;
+                if(! movie.paused)
+                {
+                    movie.pause();
+                }
+            }
+            else
+            {
+                x=true
+                video.style.display="block";
+            }
+        });
+        document.getElementsByClassName("rotate-btn")[0].addEventListener("click", ()=>{
+            if(y==true)
+            {
+                movie.style.transform="rotate(90deg)";
+                y=false;
+                movie.volume=0;
+            }
+            else
+            {
+                movie.style.transform="rotate(0deg)";
+                y=true;
+            }
+        })
+    </script>
+  </body>
+</html>
